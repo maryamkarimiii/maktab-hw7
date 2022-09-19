@@ -1,6 +1,6 @@
 package ir.maktab.hw7.modle;
 
-public class medicine {
+public class Medicine {
     private String name;
     private String producerCompany;
     private Boolean supportByInsurance;
