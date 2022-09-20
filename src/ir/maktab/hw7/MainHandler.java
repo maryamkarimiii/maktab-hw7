@@ -1,6 +1,8 @@
 package ir.maktab.hw7;
 
+import ir.maktab.hw7.modle.Medicine;
 import ir.maktab.hw7.modle.Patient;
+import ir.maktab.hw7.servic.AdminServiceImpl;
 import ir.maktab.hw7.servic.UserServiceImpl;
 
 import java.sql.SQLException;
@@ -46,13 +48,38 @@ public class MainHandler {
                     break;
                 }
                 System.out.println("hello" + userName + "what do you want: \n 1-buy with prescription \n 2-buy without prescription");
-                switch (Integer.parseInt(scanner.nextLine())){
+                switch (Integer.parseInt(scanner.nextLine())) {
                     case 1:
 
 
                 }
 
 
+        }
+    }
+
+    public static void adminMain() throws SQLException {
+        AdminServiceImpl adminService=AdminServiceImpl.getInstance();
+        System.out.println("chose:\n 1-add medicine \n 2-delete medicine \n 3-confirm prescription \n");
+        switch (Integer.parseInt(scanner.nextLine())){
+            case 1:
+                Medicine medicine=new Medicine();
+                System.out.println("enter medicine name");
+                medicine.setName(scanner.nextLine());
+                System.out.println("enter medicine company");
+                medicine.setProducerCompany(scanner.nextLine());
+                System.out.println("enter medicine classification");
+                medicine.setClassification(scanner.nextLine());
+                System.out.println("is it support by insurance? true or false");
+                medicine.setSupportByInsurance(scanner.nextBoolean());
+                System.out.println("is it OTC? true or false");
+                medicine.setOTC(scanner.nextBoolean());
+                scanner.nextLine();
+                System.out.println("enter its price");
+                medicine.setPrice(Integer.parseInt(scanner.nextLine()));
+                if(adminService.addMedicine(medicine))
+                    System.out.println("add medicine be successful");
+                else System.out.println("not be successful try another time");
         }
     }
 }

@@ -3,8 +3,9 @@ package ir.maktab.hw7.modle;
 public class Medicine {
     private String name;
     private String producerCompany;
+    private String classification;
     private Boolean supportByInsurance;
-    private Boolean RX;
+    private Boolean OTC;
     private Integer price;
 
     public String getName() {
@@ -23,6 +24,14 @@ public class Medicine {
         this.producerCompany = producerCompany;
     }
 
+    public String getClassification() {
+        return classification;
+    }
+
+    public void setClassification(String classification) {
+        this.classification = classification;
+    }
+
     public Boolean getSupportByInsurance() {
         return supportByInsurance;
     }
@@ -31,12 +40,12 @@ public class Medicine {
         this.supportByInsurance = supportByInsurance;
     }
 
-    public Boolean getRX() {
-        return RX;
+    public Boolean getOTC() {
+        return OTC;
     }
 
-    public void setRX(Boolean RX) {
-        this.RX = RX;
+    public void setOTC(Boolean OTC) {
+        this.OTC = OTC;
     }
 
     public Integer getPrice() {
