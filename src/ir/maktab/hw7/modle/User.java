@@ -5,6 +5,15 @@ public abstract class User {
     private String lastName;
     private String nationalCode;
 
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String nationalCode) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nationalCode = nationalCode;
+    }
+
     public String getFirstName() {
         return firstName;
     }
