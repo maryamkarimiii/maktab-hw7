@@ -19,5 +19,4 @@ public class Patient extends User{
     public void setAddress(String address) {
         this.address = address;
     }
-
 }

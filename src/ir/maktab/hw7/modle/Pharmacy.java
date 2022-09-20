@@ -6,6 +6,7 @@ public class Pharmacy {
     private String name;
     private List<Medicine>medicines;
     private Admin admin;
+    private String address;
 
     public String getName() {
         return name;
@@ -29,5 +30,13 @@ public class Pharmacy {
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
