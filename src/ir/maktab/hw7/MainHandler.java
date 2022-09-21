@@ -59,8 +59,7 @@ public class MainHandler {
                     case 1:
                         Prescription prescription = new Prescription();
                         prescription.setPatient(patient);
-                        int id=userService.addPrescription(prescription);
-                        prescription.setMedicines(getMedicinesList());
+                        getMedicinesList(userService.addPrescription(prescription));
                         break;
                     case 2:
                         Prescription prescription1 = new Prescription();
@@ -77,7 +76,7 @@ public class MainHandler {
                         System.out.println("enter you doctor GMCNumber,you can find it as fifth number in doctor seal");
                         doctor.setGMCNumber(scanner.nextLine());
                         prescription1.setDoctor(doctor);
-                        prescription1.setMedicines(getMedicinesList());
+                        getMedicinesList( userService.addPrescription(prescription));
                         break;
                     case 3:
                         break;
@@ -111,9 +110,26 @@ public class MainHandler {
                 if (adminService.addMedicine(medicine))
                     System.out.println("add medicine be successful");
                 else System.out.println("not be successful try another time");
+                break;
+            case 2:
+                Medicine medicine1 = new Medicine();
+                System.out.println("enter medicine name");
+                medicine1.setName(scanner.nextLine());
+                System.out.println("enter medicine company");
+                medicine1.setProducerCompany(scanner.nextLine());
+                System.out.println("enter the medicine dose(if it drug)");
+                medicine1.setDose(Integer.parseInt(scanner.nextLine()));
+                if(adminService.deleteMedicine(medicine1))
+                    System.out.println("delete successfully");
+                else System.out.println("not be successfully ");
+                break;
+            case 3:
+                adminService.confirmPrescription();
+                System.out.println( adminService.confirmPrescription() + "prescription are checked");
         }
     }
-    public static List<Medicine> getMedicinesList() throws SQLException {
+
+    public static List<Medicine> getMedicinesList(int id) throws SQLException {
         List<Medicine> medicines = new ArrayList<>();
         AdminServiceImpl adminService = AdminServiceImpl.getInstance();
         int countOrders = 1;
@@ -125,7 +141,7 @@ public class MainHandler {
             medicine.setDose(Integer.parseInt(scanner.nextLine()));
             System.out.println("how many" + medicine.getName() + "do you want");
             int count = Integer.parseInt(scanner.nextLine());
-            medicine.setId(adminService.getMedicineId(medicine));
+            medicine.setPrescription_id(id);
             medicines.add(medicine);
             System.out.println(countOrders + "item add \n if your order finish press q else press enter to continue");
         } while (!scanner.nextLine().equals("q"));

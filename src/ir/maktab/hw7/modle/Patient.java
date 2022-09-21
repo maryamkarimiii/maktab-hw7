@@ -11,6 +11,11 @@ public class Patient extends User{
         this.insurance = insurance;
         this.address = address;
     }
+
+    public Patient(String nationalCode) {
+        super(nationalCode);
+    }
+
     public Patient(){}
 
     public boolean isInsurance() {

@@ -6,6 +6,20 @@ public class Doctor {
     private String GMCNumber;
     private String specialist;
 
+    public Doctor() {
+    }
+
+    public Doctor(String firstName, String lastName, String GMCNumber, String specialist) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.GMCNumber = GMCNumber;
+        this.specialist = specialist;
+    }
+
+    public Doctor(String GMCNumber) {
+        this.GMCNumber = GMCNumber;
+    }
+
     public String getFirstName() {
         return firstName;
     }

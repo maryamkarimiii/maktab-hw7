@@ -14,6 +14,10 @@ public abstract class User {
         this.nationalCode = nationalCode;
     }
 
+    public User(String nationalCode) {
+        this.nationalCode = nationalCode;
+    }
+
     public String getFirstName() {
         return firstName;
     }

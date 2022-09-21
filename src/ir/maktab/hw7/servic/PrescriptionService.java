@@ -1,5 +1,6 @@
 package ir.maktab.hw7.servic;
 
+import ir.maktab.hw7.modle.Medicine;
 import ir.maktab.hw7.modle.Prescription;
 import ir.maktab.hw7.repository.PrescriptionRepository;
 
@@ -21,5 +22,6 @@ public class PrescriptionService {
     public Integer addPrescription(Prescription prescription) throws SQLException {
       return prescriptionRepository.addPrescription(prescription);
     }
+
 
 }

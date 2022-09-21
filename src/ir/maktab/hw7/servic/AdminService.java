@@ -1,7 +1,6 @@
 package ir.maktab.hw7.servic;
 
 import ir.maktab.hw7.modle.Medicine;
-import ir.maktab.hw7.modle.Prescription;
 
 import java.sql.SQLException;
 
@@ -9,5 +8,5 @@ public interface AdminService {
     boolean addMedicine(Medicine medicine) throws SQLException;
     Integer calculatePriceWithInsurance(int basePrice);
     Integer getMedicineId(Medicine medicine) throws SQLException;
-    Boolean confirmPrescription(Prescription prescription);
+    Integer confirmPrescription() throws SQLException;
 }

@@ -1,23 +1,41 @@
 package ir.maktab.hw7.modle;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Prescription {
+    private Integer id;
     private Date date;
     private Patient patient;
     private Doctor doctor;
+    private PrescriptionStatus prescriptionStatus;
     private List<Medicine>medicines;
 
     public Prescription() {
     }
 
-    public Prescription(Date date, Patient patient, Doctor doctor, List<Medicine> medicines) {
+    public Prescription(Integer id, Date date, Patient patient, Doctor doctor, PrescriptionStatus prescriptionStatus) {
+        this.id = id;
         this.date = date;
         this.patient = patient;
         this.doctor = doctor;
+        this.prescriptionStatus = prescriptionStatus;
+    }
+
+    public Prescription(Date date, Patient patient, Doctor doctor, PrescriptionStatus prescriptionStatus, List<Medicine> medicines) {
+        this.date = date;
+        this.patient = patient;
+        this.doctor = doctor;
+        this.prescriptionStatus = prescriptionStatus;
         this.medicines = medicines;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Date getDate() {
@@ -42,6 +60,14 @@ public class Prescription {
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+
+    public PrescriptionStatus getPrescriptionStatus() {
+        return prescriptionStatus;
+    }
+
+    public void setPrescriptionStatus(PrescriptionStatus prescriptionStatus) {
+        this.prescriptionStatus = prescriptionStatus;
     }
 
     public List<Medicine> getMedicines() {
