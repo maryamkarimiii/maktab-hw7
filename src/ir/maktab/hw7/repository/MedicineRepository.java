@@ -16,7 +16,7 @@ public class MedicineRepository {
     }
     public boolean addMedicine(Medicine medicine) throws SQLException {
         Connection connection=ConnectionGate.getConnection();
-        String insertQuery="INSERT into \"medicine\" (name,producer,classification,insurance_support,otc,price) VALUES(?,?,?,?,?,?)";
+        String insertQuery="INSERT into medicine (name,producer,classification,insurance_support,otc,price) VALUES(?,?,?,?,?,?)";
         PreparedStatement preparedStatement= connection.prepareStatement(insertQuery);
         preparedStatement.setString(1,medicine.getName());
         preparedStatement.setString(2,medicine.getProducerCompany());
@@ -26,5 +26,16 @@ public class MedicineRepository {
         preparedStatement.setInt(6,medicine.getPrice());
         int result=preparedStatement.executeUpdate();
         return result>=1;
+    }
+    public Integer getId(Medicine medicine) throws SQLException {
+        Connection connection=ConnectionGate.getConnection();
+        String selectQuery="SELECT id from medicine WHERE \"name\"=? AND dose=?";
+        PreparedStatement preparedStatement= connection.prepareStatement(selectQuery);
+        preparedStatement.setString(1,medicine.getName());
+        preparedStatement.setInt(2,medicine.getDose());
+        ResultSet resultSet=preparedStatement.executeQuery();
+        resultSet.next();
+        int result=resultSet.getInt("id");
+        return result;
     }
 }

@@ -1,6 +1,7 @@
 package ir.maktab.hw7.modle;
 
 public class Medicine {
+    private Integer id;
     private String name;
     private String producerCompany;
     private String classification;
@@ -8,6 +9,15 @@ public class Medicine {
     private Boolean supportByInsurance;
     private Boolean OTC;
     private Integer price;
+    private Boolean isExist;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -63,6 +73,14 @@ public class Medicine {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public Boolean getExist() {
+        return isExist;
+    }
+
+    public void setExist(Boolean exist) {
+        isExist = exist;
     }
 
     @Override

@@ -28,4 +28,9 @@ public class AdminServiceImpl implements AdminService{
         return finalPrice;
     }
 
+    @Override
+    public Integer getMedicineId(Medicine medicine) throws SQLException {
+       return medicineRepository.getId(medicine);
+    }
+
 }

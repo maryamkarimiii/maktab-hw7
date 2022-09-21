@@ -1,6 +1,8 @@
 package ir.maktab.hw7.repository;
 
+import ir.maktab.hw7.modle.Medicine;
 import ir.maktab.hw7.modle.Patient;
+import ir.maktab.hw7.modle.Prescription;
 import ir.maktab.hw7.modle.User;
 
 import java.sql.*;
@@ -42,5 +44,17 @@ public class UserRepository {
                 resultSet.getString("address"));
         connection.close();
         return patient;
+    }
+    public boolean addPrescription(Prescription prescription,String medicineId) throws SQLException {
+        Connection connection=ConnectionGate.getConnection();
+        String insertQuery="INSERT into \"prescription\" (\"date\",user_id,flag,medicines) VALUES (?,?,?,?)";
+        PreparedStatement preparedStatement= connection.prepareStatement(insertQuery);
+        preparedStatement.setDate(1, (Date) prescription.getDate());
+        preparedStatement.setString(2,prescription.getPatient().getNationalCode());
+        preparedStatement.setBoolean(3,true);
+        preparedStatement.setString(4,medicineId);
+        int result=preparedStatement.executeUpdate();
+        connection.close();
+        return result>=1;
     }
 }

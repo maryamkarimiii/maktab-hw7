@@ -53,17 +53,20 @@ public class MainHandler {
                     System.out.println("userName or password is wrong");
                     break;
                 }
-                System.out.println("hello" + userName + "what do you want: \n 1-buy with doctor prescription \n 2-buy without prescription");
+                System.out.println("hello" + userName + "what do you want: \n 1-buy with doctor prescription \n 2-buy without prescription \n" +
+                        "3-see confirmed prescription \n 4-edite prescription \n 5-delete prescription");
                 switch (Integer.parseInt(scanner.nextLine())) {
                     case 1:
                         Prescription prescription = new Prescription();
                         prescription.setPatient(patient);
                         prescription.setMedicines(getMedicinesList());
+                        break;
                     case 2:
-                        prescription.setPatient(patient);
+                        Prescription prescription1 = new Prescription();
+                        prescription1.setPatient(patient);
                         Doctor doctor = new Doctor();
                         System.out.println("enter your prescription date");
-                        prescription.setDate(Date.valueOf(scanner.nextLine()));
+                        prescription1.setDate(Date.valueOf(scanner.nextLine()));
                         System.out.println("enter your doctor firstName:");
                         doctor.setFirstName(scanner.nextLine());
                         System.out.println("enter your doctor lastName");
@@ -72,8 +75,13 @@ public class MainHandler {
                         doctor.setSpecialist(scanner.nextLine());
                         System.out.println("enter you doctor GMCNumber,you can find it as fifth number in doctor seal");
                         doctor.setGMCNumber(scanner.nextLine());
-                        prescription.setDoctor(doctor);
-                        prescription.setMedicines(getMedicinesList());
+                        prescription1.setDoctor(doctor);
+                        prescription1.setMedicines(getMedicinesList());
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+
                 }
         }
     }
@@ -105,8 +113,9 @@ public class MainHandler {
         }
     }
 
-    public static List<Medicine> getMedicinesList() {
+    public static List<Medicine> getMedicinesList() throws SQLException {
         List<Medicine> medicines = new ArrayList<>();
+        AdminServiceImpl adminService = AdminServiceImpl.getInstance();
         int countOrders = 1;
         do {
             Medicine medicine = new Medicine();
@@ -116,6 +125,7 @@ public class MainHandler {
             medicine.setDose(Integer.parseInt(scanner.nextLine()));
             System.out.println("how many" + medicine.getName() + "do you want");
             int count = Integer.parseInt(scanner.nextLine());
+            medicine.setId(adminService.getMedicineId(medicine));
             medicines.add(medicine);
             System.out.println(countOrders + "item add \n if your order finish press q else press enter to continue");
         } while (!scanner.nextLine().equals("q"));
