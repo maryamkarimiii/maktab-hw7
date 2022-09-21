@@ -59,6 +59,7 @@ public class MainHandler {
                     case 1:
                         Prescription prescription = new Prescription();
                         prescription.setPatient(patient);
+                        int id=userService.addPrescription(prescription);
                         prescription.setMedicines(getMedicinesList());
                         break;
                     case 2:
@@ -112,7 +113,6 @@ public class MainHandler {
                 else System.out.println("not be successful try another time");
         }
     }
-
     public static List<Medicine> getMedicinesList() throws SQLException {
         List<Medicine> medicines = new ArrayList<>();
         AdminServiceImpl adminService = AdminServiceImpl.getInstance();

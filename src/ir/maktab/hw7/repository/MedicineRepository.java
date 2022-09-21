@@ -1,8 +1,11 @@
 package ir.maktab.hw7.repository;
 
 import ir.maktab.hw7.modle.Medicine;
+import ir.maktab.hw7.modle.Prescription;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MedicineRepository {
     private static MedicineRepository medicineRepository;
@@ -38,4 +41,9 @@ public class MedicineRepository {
         int result=resultSet.getInt("id");
         return result;
     }
+    public boolean defineMedicineInPrescription(Prescription prescription){
+
+    }
+
+
 }

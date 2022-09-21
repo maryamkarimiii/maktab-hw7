@@ -1,6 +1,7 @@
 package ir.maktab.hw7.servic;
 
 import ir.maktab.hw7.modle.Medicine;
+import ir.maktab.hw7.modle.Prescription;
 import ir.maktab.hw7.repository.MedicineRepository;
 
 import java.sql.SQLException;
@@ -31,6 +32,11 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public Integer getMedicineId(Medicine medicine) throws SQLException {
        return medicineRepository.getId(medicine);
+    }
+
+    @Override
+    public Boolean confirmPrescription(Prescription prescription) {
+
     }
 
 }

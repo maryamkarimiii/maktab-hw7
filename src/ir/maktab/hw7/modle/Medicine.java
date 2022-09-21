@@ -10,6 +10,23 @@ public class Medicine {
     private Boolean OTC;
     private Integer price;
     private Boolean isExist;
+    private Prescription prescription;
+
+    public Medicine() {
+    }
+
+    public Medicine(Integer id, String name, String producerCompany, String classification, Integer dose,
+                    Boolean supportByInsurance, Boolean OTC, Integer price, Boolean isExist) {
+        this.id = id;
+        this.name = name;
+        this.producerCompany = producerCompany;
+        this.classification = classification;
+        this.dose = dose;
+        this.supportByInsurance = supportByInsurance;
+        this.OTC = OTC;
+        this.price = price;
+        this.isExist = isExist;
+    }
 
     public Integer getId() {
         return id;
@@ -83,15 +100,4 @@ public class Medicine {
         isExist = exist;
     }
 
-    @Override
-    public String toString() {
-        return "Medicine{" +
-                "name='" + name + '\'' +
-                ", producerCompany='" + producerCompany + '\'' +
-                ", classification='" + classification + '\'' +
-                ", supportByInsurance=" + supportByInsurance +
-                ", OTC=" + OTC +
-                ", price=" + price +
-                '}';
-    }
 }

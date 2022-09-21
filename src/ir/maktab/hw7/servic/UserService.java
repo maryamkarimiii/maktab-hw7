@@ -8,6 +8,6 @@ import java.sql.SQLException;
 public interface UserService {
     boolean register(Patient patient) throws SQLException;
     Patient logIN(String userName,String password) throws SQLException;
-    boolean addPrescription(Prescription prescription) throws SQLException;
+    Integer addPrescription(Prescription prescription) throws SQLException;
 
 }

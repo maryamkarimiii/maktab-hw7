@@ -1,6 +1,5 @@
 package ir.maktab.hw7.servic;
 
-import ir.maktab.hw7.modle.Medicine;
 import ir.maktab.hw7.modle.Patient;
 import ir.maktab.hw7.modle.Prescription;
 import ir.maktab.hw7.repository.UserRepository;
@@ -20,6 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     UserRepository userRepository = UserRepository.getInstance();
+    PrescriptionService prescriptionService=PrescriptionService.getInstance();
 
     @Override
     public boolean register(Patient patient) throws SQLException {
@@ -32,11 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean addPrescription(Prescription prescription) throws SQLException {
-        String medicinesId = "";
-        for (Medicine medicine : prescription.getMedicines()) {
-            medicinesId += medicine.getId() + "_";
-        }
-        return userRepository.addPrescription(prescription, medicinesId);
+    public Integer addPrescription(Prescription prescription) throws SQLException {
+      return prescriptionService.addPrescription(prescription);
     }
 }

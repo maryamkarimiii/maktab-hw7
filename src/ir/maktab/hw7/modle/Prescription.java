@@ -10,6 +10,16 @@ public class Prescription {
     private Doctor doctor;
     private List<Medicine>medicines;
 
+    public Prescription() {
+    }
+
+    public Prescription(Date date, Patient patient, Doctor doctor, List<Medicine> medicines) {
+        this.date = date;
+        this.patient = patient;
+        this.doctor = doctor;
+        this.medicines = medicines;
+    }
+
     public Date getDate() {
         return date;
     }
