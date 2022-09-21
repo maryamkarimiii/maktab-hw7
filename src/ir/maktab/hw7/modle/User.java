@@ -37,4 +37,13 @@ public abstract class User {
     public void setNationalCode(String nationalCode) {
         this.nationalCode = nationalCode;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", nationalCode='" + nationalCode + '\'' +
+                '}';
+    }
 }

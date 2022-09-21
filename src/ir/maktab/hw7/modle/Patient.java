@@ -44,4 +44,14 @@ public class Patient extends User{
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "insurance=" + insurance +
+                ", address='" + address + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                "} " + super.toString();
+    }
 }

@@ -1,6 +1,7 @@
 package ir.maktab.hw7.servic;
 
 import ir.maktab.hw7.modle.Patient;
+import ir.maktab.hw7.modle.Prescription;
 import ir.maktab.hw7.repository.UserRepository;
 
 import java.sql.SQLException;
@@ -26,5 +27,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Patient logIN(String userName, String password) throws SQLException {
         return userRepository.selectUser(userName, password);
+    }
+
+    @Override
+    public boolean addPrescription(Prescription prescription) {
+        return false;
     }
 }

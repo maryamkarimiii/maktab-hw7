@@ -4,6 +4,7 @@ public class Medicine {
     private String name;
     private String producerCompany;
     private String classification;
+    private Integer dose;
     private Boolean supportByInsurance;
     private Boolean OTC;
     private Integer price;
@@ -32,6 +33,14 @@ public class Medicine {
         this.classification = classification;
     }
 
+    public Integer getDose() {
+        return dose;
+    }
+
+    public void setDose(Integer dose) {
+        this.dose = dose;
+    }
+
     public Boolean getSupportByInsurance() {
         return supportByInsurance;
     }
@@ -54,5 +63,17 @@ public class Medicine {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "name='" + name + '\'' +
+                ", producerCompany='" + producerCompany + '\'' +
+                ", classification='" + classification + '\'' +
+                ", supportByInsurance=" + supportByInsurance +
+                ", OTC=" + OTC +
+                ", price=" + price +
+                '}';
     }
 }
