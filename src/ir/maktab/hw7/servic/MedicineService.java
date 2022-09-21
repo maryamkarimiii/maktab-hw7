@@ -18,17 +18,11 @@ public class MedicineService {
         return medicineService;
     }
     MedicineRepository medicineRepository = MedicineRepository.getInstance();
-    public List<Medicine> showMedicine(int id) throws SQLException {
-        return medicineRepository.getMedicines(id);
-    }
     public Boolean deleteMedicine(Medicine medicine) throws SQLException {
         return medicineRepository.deleteMedicine(medicine);
     }
     public boolean addMedicine(Medicine medicine) throws SQLException {
         return medicineRepository.addMedicine(medicine);
-    }
-    public Integer getMedicineId(Medicine medicine) throws SQLException {
-        return medicineRepository.getId(medicine);
     }
     public List<Medicine> getMedicines(int id) throws SQLException {
         return medicineRepository.getMedicines(id);

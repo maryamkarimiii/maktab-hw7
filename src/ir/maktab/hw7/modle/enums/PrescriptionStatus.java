@@ -1,4 +1,4 @@
-package ir.maktab.hw7.modle;
+package ir.maktab.hw7.modle.enums;
 
 public enum PrescriptionStatus {
     WAITING,

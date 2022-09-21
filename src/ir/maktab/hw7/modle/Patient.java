@@ -1,14 +1,12 @@
 package ir.maktab.hw7.modle;
 
 public class Patient extends User{
-    private boolean insurance;
     private String address;
     private String userName;
     private String password;
 
-    public Patient(String firstName, String lastName, String nationalCode, boolean insurance, String address) {
+    public Patient(String firstName, String lastName, String nationalCode, String address) {
         super(firstName, lastName, nationalCode);
-        this.insurance = insurance;
         this.address = address;
     }
 
@@ -17,14 +15,6 @@ public class Patient extends User{
     }
 
     public Patient(){}
-
-    public boolean isInsurance() {
-        return insurance;
-    }
-
-    public void setInsurance(boolean insurance) {
-        this.insurance = insurance;
-    }
 
     public String getAddress() {
         return address;
@@ -53,7 +43,6 @@ public class Patient extends User{
     @Override
     public String toString() {
         return "Patient{" +
-                "insurance=" + insurance +
                 ", address='" + address + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +

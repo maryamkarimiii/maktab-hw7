@@ -1,5 +1,7 @@
 package ir.maktab.hw7.modle;
 
+import ir.maktab.hw7.modle.enums.PrescriptionStatus;
+
 import java.util.Date;
 import java.util.List;
 
@@ -20,14 +22,6 @@ public class Prescription {
         this.patient = patient;
         this.doctor = doctor;
         this.prescriptionStatus = prescriptionStatus;
-    }
-
-    public Prescription(Date date, Patient patient, Doctor doctor, PrescriptionStatus prescriptionStatus, List<Medicine> medicines) {
-        this.date = date;
-        this.patient = patient;
-        this.doctor = doctor;
-        this.prescriptionStatus = prescriptionStatus;
-        this.medicines = medicines;
     }
 
     public Integer getId() {
@@ -70,8 +64,8 @@ public class Prescription {
         this.prescriptionStatus = prescriptionStatus;
     }
 
-    public List<Medicine> getMedicines() {
-        return medicines;
+    public List<Medicine> getMedicines(List<Medicine> medicines) {
+        return this.medicines;
     }
 
     public void setMedicines(List<Medicine> medicines) {

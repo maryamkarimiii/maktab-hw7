@@ -7,8 +7,7 @@ import ir.maktab.hw7.modle.Prescription;
 import ir.maktab.hw7.servic.AdminServiceImpl;
 import ir.maktab.hw7.servic.UserServiceImpl;
 
-import java.sql.Date;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -32,10 +31,6 @@ public class MainHandler {
                 String nationalCode = scanner.nextLine();
                 patient.setNationalCode(nationalCode);
                 patient.setPassword(nationalCode);
-                System.out.println("do you have social security insurance enter yes or no");
-                if (scanner.nextLine().equals("yes"))
-                    patient.setInsurance(true);
-                patient.setInsurance(false);
                 System.out.println("enter your exact address");
                 patient.setAddress(scanner.nextLine());
                 if (userService.register(patient))
@@ -100,8 +95,6 @@ public class MainHandler {
                 medicine.setClassification(scanner.nextLine());
                 System.out.println("enter the medicine dose(if it drug)");
                 medicine.setDose(Integer.parseInt(scanner.nextLine()));
-                System.out.println("is it support by insurance? true or false");
-                medicine.setSupportByInsurance(scanner.nextBoolean());
                 System.out.println("is it OTC? true or false");
                 medicine.setOTC(scanner.nextBoolean());
                 scanner.nextLine();
@@ -132,7 +125,7 @@ public class MainHandler {
     public static List<Medicine> getMedicinesList(int id) throws SQLException {
         List<Medicine> medicines = new ArrayList<>();
         AdminServiceImpl adminService = AdminServiceImpl.getInstance();
-        int countOrders = 1;
+        int countOrders =0;
         do {
             Medicine medicine = new Medicine();
             System.out.println("enter name of what you need");
@@ -143,8 +136,10 @@ public class MainHandler {
             int count = Integer.parseInt(scanner.nextLine());
             medicine.setPrescription_id(id);
             medicines.add(medicine);
-            System.out.println(countOrders + "item add \n if your order finish press q else press enter to continue");
-        } while (!scanner.nextLine().equals("q"));
+            countOrders++;
+            System.out.println(countOrders + "item add \n if your order finish press q else press enter to continue\n" +
+                    "notice:you can enter" + (10 - countOrders) +"items more");
+        } while (!scanner.nextLine().equals("q") && countOrders<10);
         return medicines;
     }
 }

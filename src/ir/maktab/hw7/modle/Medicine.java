@@ -5,7 +5,6 @@ public class Medicine {
     private String producerCompany;
     private String classification;
     private Integer dose;
-    private Boolean supportByInsurance;
     private Boolean OTC;
     private Integer price;
     private Boolean isExist;
@@ -20,7 +19,6 @@ public class Medicine {
         this.producerCompany = producerCompany;
         this.classification = classification;
         this.dose = dose;
-        this.supportByInsurance = supportByInsurance;
         this.OTC = OTC;
         this.price = price;
         this.isExist = isExist;
@@ -57,14 +55,6 @@ public class Medicine {
 
     public void setDose(Integer dose) {
         this.dose = dose;
-    }
-
-    public Boolean getSupportByInsurance() {
-        return supportByInsurance;
-    }
-
-    public void setSupportByInsurance(Boolean supportByInsurance) {
-        this.supportByInsurance = supportByInsurance;
     }
 
     public Boolean getOTC() {

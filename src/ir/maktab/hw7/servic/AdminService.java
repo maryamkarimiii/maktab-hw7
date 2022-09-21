@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 public interface AdminService {
     boolean addMedicine(Medicine medicine) throws SQLException;
-    Integer calculatePriceWithInsurance(int basePrice);
     Integer getMedicineId(Medicine medicine) throws SQLException;
     Integer confirmPrescription() throws SQLException;
 }

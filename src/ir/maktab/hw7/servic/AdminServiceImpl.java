@@ -2,7 +2,7 @@ package ir.maktab.hw7.servic;
 
 import ir.maktab.hw7.modle.Medicine;
 import ir.maktab.hw7.modle.Prescription;
-import ir.maktab.hw7.modle.PrescriptionStatus;
+import ir.maktab.hw7.modle.enums.PrescriptionStatus;
 import ir.maktab.hw7.repository.PrescriptionRepository;
 
 import java.sql.SQLException;
@@ -22,21 +22,16 @@ public class AdminServiceImpl implements AdminService {
         return adminService;
     }
 
-   MedicineService medicineService=MedicineService.getInstance();
+    MedicineService medicineService = MedicineService.getInstance();
     PrescriptionRepository prescriptionRepository = PrescriptionRepository.getInstance();
 
     @Override
     public boolean addMedicine(Medicine medicine) throws SQLException {
         return medicineService.addMedicine(medicine);
     }
+
     public Boolean deleteMedicine(Medicine medicine) throws SQLException {
         return medicineService.deleteMedicine(medicine);
-    }
-
-    @Override
-    public Integer calculatePriceWithInsurance(int basePrice) {
-        int finalPrice = (int) (basePrice * 9.0);
-        return finalPrice;
     }
 
     @Override
@@ -47,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Integer confirmPrescription() throws SQLException {
         List<Prescription> prescriptions = prescriptionRepository.getPrescriptionByStatus();
-        if(prescriptions.size()==0)
+        if (prescriptions.size() == 0)
             return 0;
         for (Prescription prescription : prescriptions) {
             if (expireDate(prescription.getDate()) && prescription.getDoctor() == null) {
