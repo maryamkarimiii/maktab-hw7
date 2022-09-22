@@ -1,6 +1,6 @@
 package ir.maktab.hw7.modle;
 
-public class Patient extends User{
+public class Patient extends User {
     private String address;
     private String userName;
     private String password;
@@ -14,7 +14,8 @@ public class Patient extends User{
         super(nationalCode);
     }
 
-    public Patient(){}
+    public Patient() {
+    }
 
     public String getAddress() {
         return address;

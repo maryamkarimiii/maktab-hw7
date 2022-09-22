@@ -11,7 +11,8 @@ public class Prescription {
     private Patient patient;
     private Doctor doctor;
     private PrescriptionStatus prescriptionStatus;
-    private List<Medicine>medicines;
+    private List<Medicine> medicines;
+    private Integer totalPrice;
 
     public Prescription() {
     }
@@ -64,11 +65,32 @@ public class Prescription {
         this.prescriptionStatus = prescriptionStatus;
     }
 
-    public List<Medicine> getMedicines(List<Medicine> medicines) {
-        return this.medicines;
+    public List<Medicine> getMedicines() {
+        return medicines;
     }
 
     public void setMedicines(List<Medicine> medicines) {
         this.medicines = medicines;
+    }
+
+    public Integer getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Integer totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Prescription{" +
+                "id=" + id +
+                ", date=" + date +
+                ", patient=" + patient +
+                ", doctor=" + doctor +
+                ", prescriptionStatus=" + prescriptionStatus +
+                ", medicines=" + medicines +
+                ", totalPrice=" + totalPrice +
+                '}';
     }
 }

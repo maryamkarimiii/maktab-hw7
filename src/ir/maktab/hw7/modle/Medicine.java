@@ -13,8 +13,7 @@ public class Medicine {
     public Medicine() {
     }
 
-    public Medicine( String name, String producerCompany, String classification, Integer dose,
-                    Boolean supportByInsurance, Boolean OTC, Integer price, Boolean isExist, Integer prescription_id) {
+    public Medicine(String name, String producerCompany, String classification, Integer dose, Boolean OTC, Integer price, Boolean isExist, Integer prescription_id) {
         this.name = name;
         this.producerCompany = producerCompany;
         this.classification = classification;
@@ -23,6 +22,13 @@ public class Medicine {
         this.price = price;
         this.isExist = isExist;
         this.prescription_id = prescription_id;
+    }
+
+    public Medicine(String name, String producerCompany, Integer dose, Integer price) {
+        this.name = name;
+        this.producerCompany = producerCompany;
+        this.dose = dose;
+        this.price = price;
     }
 
     public String getName() {
@@ -87,5 +93,19 @@ public class Medicine {
 
     public void setPrescription_id(Integer prescription_id) {
         this.prescription_id = prescription_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Medicine{" +
+                "name='" + name + '\'' +
+                ", producerCompany='" + producerCompany + '\'' +
+                ", classification='" + classification + '\'' +
+                ", dose=" + dose +
+                ", OTC=" + OTC +
+                ", price=" + price +
+                ", isExist=" + isExist +
+                ", prescription_id=" + prescription_id +
+                '}';
     }
 }

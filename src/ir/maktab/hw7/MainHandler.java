@@ -4,8 +4,8 @@ import ir.maktab.hw7.modle.Doctor;
 import ir.maktab.hw7.modle.Medicine;
 import ir.maktab.hw7.modle.Patient;
 import ir.maktab.hw7.modle.Prescription;
-import ir.maktab.hw7.servic.AdminServiceImpl;
-import ir.maktab.hw7.servic.UserServiceImpl;
+import ir.maktab.hw7.servic.AdminService;
+import ir.maktab.hw7.servic.UserService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class MainHandler {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void menu() throws SQLException {
-        UserServiceImpl userService = UserServiceImpl.getInstance();
+        UserService userService = UserService.getInstance();
         System.out.println("hello please enter: \n 1-sign up \n 2-log in \n 3-log out");
         switch (Integer.parseInt(scanner.nextLine())) {
             case 1:
@@ -43,47 +43,17 @@ public class MainHandler {
                 String userName = scanner.nextLine();
                 System.out.println("enter your password");
                 String password = scanner.nextLine();
-                patient = userService.logIN(userName, password);
-                if (patient == null) {
-                    System.out.println("userName or password is wrong");
-                    break;
-                }
-                System.out.println("hello" + userName + "what do you want: \n 1-buy with doctor prescription \n 2-buy without prescription \n" +
-                        "3-see confirmed prescription \n 4-edite prescription \n 5-delete prescription");
-                switch (Integer.parseInt(scanner.nextLine())) {
-                    case 1:
-                        Prescription prescription = new Prescription();
-                        prescription.setPatient(patient);
-                        getMedicinesList(userService.addPrescription(prescription));
-                        break;
-                    case 2:
-                        Prescription prescription1 = new Prescription();
-                        prescription1.setPatient(patient);
-                        Doctor doctor = new Doctor();
-                        System.out.println("enter your prescription date");
-                        prescription1.setDate(Date.valueOf(scanner.nextLine()));
-                        System.out.println("enter your doctor firstName:");
-                        doctor.setFirstName(scanner.nextLine());
-                        System.out.println("enter your doctor lastName");
-                        doctor.setLastName(scanner.nextLine());
-                        System.out.println("enter your doctor specialist like:circulatory specialist");
-                        doctor.setSpecialist(scanner.nextLine());
-                        System.out.println("enter you doctor GMCNumber,you can find it as fifth number in doctor seal");
-                        doctor.setGMCNumber(scanner.nextLine());
-                        prescription1.setDoctor(doctor);
-                        getMedicinesList( userService.addPrescription(prescription));
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-
+                if (userName.equals("admin") && password.equals("pharmacyAdmin1")) {
+                    adminMain();
+                } else {
+                    patientMain(userName, password);
                 }
         }
     }
 
     public static void adminMain() throws SQLException {
-        AdminServiceImpl adminService = AdminServiceImpl.getInstance();
-        System.out.println("chose:\n 1-add medicine \n 2-delete medicine \n 3-confirm prescription \n");
+        AdminService adminService = AdminService.getInstance();
+        System.out.println("chose:\n 1-add medicine \n 2-delete medicine \n 3-confirm prescription \n 4-change medicine exist");
         switch (Integer.parseInt(scanner.nextLine())) {
             case 1:
                 Medicine medicine = new Medicine();
@@ -112,20 +82,95 @@ public class MainHandler {
                 medicine1.setProducerCompany(scanner.nextLine());
                 System.out.println("enter the medicine dose(if it drug)");
                 medicine1.setDose(Integer.parseInt(scanner.nextLine()));
-                if(adminService.deleteMedicine(medicine1))
+                if (adminService.deleteMedicine(medicine1))
                     System.out.println("delete successfully");
                 else System.out.println("not be successfully ");
                 break;
             case 3:
                 adminService.confirmPrescription();
-                System.out.println( adminService.confirmPrescription() + "prescription are checked");
+                System.out.println(adminService.confirmPrescription() + "prescription are checked");
+                break;
+            case 4:
+                Medicine medicine2 = new Medicine();
+                System.out.println("enter medicine name");
+                medicine2.setName(scanner.nextLine());
+                System.out.println("enter medicine company");
+                medicine2.setProducerCompany(scanner.nextLine());
+                System.out.println("enter the medicine dose(if it drug)");
+                medicine2.setDose(Integer.parseInt(scanner.nextLine()));
+                if (adminService.updateMedicineExistence(medicine2))
+                    System.out.println("exist change to false");
+                else System.out.println("not successfully");
+        }
+    }
+
+    public static void patientMain(String userName, String password) throws SQLException {
+        UserService userService = UserService.getInstance();
+        Patient patient;
+        patient = userService.logIN(userName, password);
+        if (patient == null) {
+            System.out.println("userName or password is wrong");
+            return;
+        }
+        System.out.println("hello" + userName + "what do you want: \n 1-buy with doctor prescription \n 2-buy without prescription \n" +
+                "3-see confirmed prescription \n 4-edite prescription \n 5-delete prescription");
+        switch (Integer.parseInt(scanner.nextLine())) {
+            case 1:
+                Prescription prescription = new Prescription();
+                prescription.setPatient(patient);
+                getMedicinesList(userService.addPrescription(prescription));
+                break;
+            case 2:
+                Prescription prescription1 = new Prescription();
+                prescription1.setPatient(patient);
+                Doctor doctor = new Doctor();
+                System.out.println("enter your prescription date");
+                prescription1.setDate(Date.valueOf(scanner.nextLine()));
+                System.out.println("enter your doctor firstName:");
+                doctor.setFirstName(scanner.nextLine());
+                System.out.println("enter your doctor lastName");
+                doctor.setLastName(scanner.nextLine());
+                System.out.println("enter your doctor specialist like:circulatory specialist");
+                doctor.setSpecialist(scanner.nextLine());
+                System.out.println("enter you doctor GMCNumber,you can find it as fifth number in doctor seal");
+                doctor.setGMCNumber(scanner.nextLine());
+                prescription1.setDoctor(doctor);
+                getMedicinesList(userService.addPrescription(prescription1));
+                break;
+            case 3:
+                System.out.println(userService.showConfirmedPrescription(password));
+                break;
+            case 4:
+                System.out.println("chose:\n 1-update date\n 2-update items\n ");
+                switch (Integer.parseInt(scanner.nextLine())) {
+                    case 1:
+                        System.out.println("enter your new date");
+                        if (userService.updateDate(Date.valueOf(scanner.nextLine()), password)) {
+                            userService.editePrescription(password);
+                            System.out.println("update successfully");
+                        }
+                    case 2:
+                        System.out.println(userService.showPrescription(password));
+                        System.out.println("enter drug names you want to delete");
+                        for (Medicine medicine : userService.showPrescription(password)) {
+                            if (medicine.getName().equals(scanner.nextLine()))
+                                userService.showPrescription(password).remove(medicine);
+                        }
+                        userService.editePrescription(password);
+                }
+                break;
+            case 5:
+                if (userService.deletePrescription(password))
+                    System.out.println("delete prescription successfully");
+                else System.out.println("the delete failed try again");
+
         }
     }
 
     public static List<Medicine> getMedicinesList(int id) throws SQLException {
         List<Medicine> medicines = new ArrayList<>();
-        AdminServiceImpl adminService = AdminServiceImpl.getInstance();
-        int countOrders =0;
+        AdminService adminService = AdminService.getInstance();
+        int countOrders = 0;
         do {
             Medicine medicine = new Medicine();
             System.out.println("enter name of what you need");
@@ -138,8 +183,8 @@ public class MainHandler {
             medicines.add(medicine);
             countOrders++;
             System.out.println(countOrders + "item add \n if your order finish press q else press enter to continue\n" +
-                    "notice:you can enter" + (10 - countOrders) +"items more");
-        } while (!scanner.nextLine().equals("q") && countOrders<10);
+                    "notice:you can enter" + (10 - countOrders) + "items more");
+        } while (!scanner.nextLine().equals("q") && countOrders < 10);
         return medicines;
     }
 }

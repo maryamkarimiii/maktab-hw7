@@ -51,6 +51,7 @@ public class PrescriptionRepository {
                     new Doctor(resultSet.getString(5)), PrescriptionStatus.valueOf(resultSet.getString(4)));
             prescriptions.add(prescription);
         }
+        connection.close();
         return prescriptions;
     }
 
@@ -73,6 +74,36 @@ public class PrescriptionRepository {
         Prescription prescription = new Prescription(resultSet.getInt(1),
                 resultSet.getDate(2), new Patient(resultSet.getString(3)),
                 new Doctor(resultSet.getString(5)), PrescriptionStatus.valueOf(resultSet.getString(4)));
+        connection.close();
         return prescription;
+    }
+
+    public boolean deletePrescription(String userId) throws SQLException {
+        Connection connection = ConnectionGate.getConnection();
+        String deleteQuery = "DELETE from prescription WHERE user_id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
+        preparedStatement.setString(1, userId);
+        int result = preparedStatement.executeUpdate();
+        connection.close();
+        return result >= 1;
+    }
+
+    public boolean updateDate(Date date, String userId) throws SQLException {
+        Connection connection = ConnectionGate.getConnection();
+        String updateQuery = "UPDATE prescription set date=? WHERE user_id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+        preparedStatement.setDate(1, date);
+        preparedStatement.setString(2, userId);
+        int result = preparedStatement.executeUpdate();
+        return result >= 1;
+    }
+
+    public boolean updateStatusAfterPrescriptionUpdate(String userId) throws SQLException {
+        Connection connection = ConnectionGate.getConnection();
+        String updateQuery = "UPDATE prescription set status=default WHERE user_id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+        preparedStatement.setString(1, userId);
+        int result = preparedStatement.executeUpdate();
+        return result >= 1;
     }
 }
